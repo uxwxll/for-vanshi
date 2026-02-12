@@ -4,77 +4,156 @@
 <title>For Vanshi ❤️</title>
 
 <style>
-body {
-background: linear-gradient(to right, #ffdde1, #ee9ca7);
-font-family: Arial, sans-serif;
-text-align: center;
-padding: 40px;
-color: #333;
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(to right,#ffdde1,#ee9ca7);
+text-align:center;
+overflow-x:hidden;
+color:#333;
 }
 
-.container {
-background: white;
-padding: 30px;
-border-radius: 15px;
-max-width: 600px;
-margin: auto;
-box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+.page{
+display:none;
+padding:60px 20px;
+animation:fade 1s ease;
 }
 
-button {
-background-color: #ff4d6d;
-color: white;
-border: none;
-padding: 12px 20px;
-margin: 10px;
-border-radius: 10px;
-font-size: 16px;
-cursor: pointer;
+.active{
+display:block;
 }
 
-button:hover {
-background-color: #ff1e4d;
+button{
+background:#ff4d6d;
+color:white;
+border:none;
+padding:12px 20px;
+margin:10px;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff1e4d;
+}
+
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+.heart{
+position:fixed;
+bottom:-10px;
+font-size:20px;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+from{transform:translateY(0);}
+to{transform:translateY(-100vh);}
+}
+
+img{
+width:200px;
+border-radius:15px;
+margin:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<audio autoplay loop>
+<source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
+</audio>
 
-<h1>For Vanshi ❤️</h1>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+<h1>Hi Vanshi ❤️</h1>
+<p>You made something beautiful for me...</p>
+<p>So I wanted to make something special for you too.</p>
+<button onclick="nextPage(2)">Start ❤️</button>
+</div>
 
-<p>
-You once made something beautiful for me…
-so I wanted to make something for you too.
-</p>
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+<h1>Our Story ✨</h1>
+<p>It started with simple conversations.</p>
+<p>Then slowly, you became my favorite notification.</p>
+<p>And now… you are my peace.</p>
+<button onclick="nextPage(3)">Next →</button>
+</div>
 
-<p>
-You make my normal days special,
-my bad days better,
-and my life much happier.
-</p>
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+<h1>Our Memories 📸</h1>
+<p>Every moment with you feels special.</p>
 
-<h3>Will you be my Valentine again? ❤️</h3>
+<!-- Add your photos here later -->
+<img src="https://via.placeholder.com/200">
+<img src="https://via.placeholder.com/200">
+<img src="https://via.placeholder.com/200">
 
+<br>
+<button onclick="nextPage(4)">Next →</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+<h1>Reasons I Love You ❤️</h1>
+<p>Your smile 😊</p>
+<p>Your care 🤍</p>
+<p>Your madness 😄</p>
+<p>And how you make everything better.</p>
+<button onclick="nextPage(5)">One last thing →</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+<h1>So Vanshi...</h1>
+<h2>Will you be my Valentine again? ❤️</h2>
 <button onclick="yesClick()">Yes ❤️</button>
-<button onclick="noClick()">No 😜</button>
+<button onclick="moveButton(this)">No 😜</button>
+<p id="answer"></p>
+</div>
 
-<p id="response"></p>
-
+<!-- PAGE 6 -->
+<div class="page" id="page6">
+<h1>I Love You ❤️</h1>
+<p>You didn’t just become my Valentine,</p>
+<p>you became my happiness.</p>
+<p>Thank you for being in my life.</p>
+<h2>Forever yours ❤️</h2>
 </div>
 
 <script>
-function yesClick() {
-document.getElementById("response").innerHTML =
-"I knew it 😌 I love you more than words can explain ❤️";
+function nextPage(num){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+num).classList.add("active");
 }
 
-function noClick() {
-document.getElementById("response").innerHTML =
-"Nice try… but you are stuck with me forever 😄❤️";
+function yesClick(){
+nextPage(6);
 }
+
+function moveButton(btn){
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+}
+
+setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),6000);
+},500);
 </script>
 
 </body>
 </html>
+
